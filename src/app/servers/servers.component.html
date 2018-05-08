@@ -1,9 +1,17 @@
 <h3>Server Page</h3>
 <!-- <input type="text" class="form-control" (input)="onUpdate($event)"/> -->
 <input type="text" class="form-control" [(ngModel)]="serverName"/>
+<br/>
 <button class="btn btn-primary" [disabled]="!allNewServer"
 (click)="onCreateServer()">Add Server</button>
+<br/><br/>
 <!-- <p>{{serverName}}</p> -->
-<p>{{serverStatus}}</p>
-<app-server></app-server>
-<app-server></app-server>
+<!-- <p>{{serverStatus}}</p> -->
+
+<p *ngIf="isClicked; else noServer">Server was created! Server name is {{serverName}}</p>
+
+<ng-template #noServer>
+    <p>No server was created</p>
+</ng-template>
+<div *ngFor="let server of servers; let i =index" [ngStyle]="{backgroundColor:i>4?'red':'transparent'}" 
+    [ngClass]="{'white-text':i>4}">{{server}} {{i}}</div>
